@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Name - Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@300;400;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0a;
+            --bg-secondary: #111111;
+            --text-primary: #e8e8e8;
+            --text-secondary: #a0a0a0;
+            --accent: #ff6b6b;
+            --accent-dim: #ff6b6b33;
+            --border: #222222;
+            --card-bg: #151515;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Crimson Pro', serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 107, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(107, 107, 255, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Space Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 8rem 2rem 4rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+            margin-bottom: 8rem;
+            animation: fadeInUp 0.8s ease-out 0.2s both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-content {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+            animation: fadeIn 1s ease-out 0.4s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-image img {
+            width: 280px;
+            height: 280px;
+            border-radius: 12px;
+            object-fit: cover;
+            border: 2px solid var(--border);
+            transition: transform 0.4s ease, border-color 0.4s ease;
+        }
+
+        .hero-image img:hover {
+            transform: scale(1.02);
+            border-color: var(--accent);
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--text-secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .location {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .highlight {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .keywords {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            font-style: italic;
+            margin-top: 2rem;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            background: var(--card-bg);
+        }
+
+        .social-link:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        section {
+            margin-bottom: 6rem;
+            animation: fadeInUp 0.8s ease-out both;
+            animation-delay: calc(var(--delay, 0) * 0.1s);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 3rem;
+        }
+
+        .section-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--accent);
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+
+        /* Card Styling */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 3px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateX(8px);
+            border-color: var(--accent-dim);
+        }
+
+        .card:hover::before {
+            height: 100%;
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .card-title {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .card-date {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-content {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .card-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .meta-item {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.1);
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .project-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--accent-dim);
+            color: var(--accent);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-secondary);
+            border-top: 1px solid var(--border);
+            margin-top: 6rem;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .nav-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero {
+                flex-direction: column-reverse;
+                text-align: center;
+                min-height: auto;
+            }
+
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-image img {
+                width: 220px;
+                height: 220px;
+            }
+
+            h2 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection color */
+        ::selection {
+            background: var(--accent);
+            color: var(--bg-primary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-content">
+            <a href="#" class="logo">YN</a>
+            <ul class="nav-links">
+                <li><a href="#education">Education</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#publications">Publications</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#awards">Awards</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Your Name</h1>
+                <div class="location">
+                    <span>📍</span>
+                    <span>Your City, Your Country</span>
+                </div>
+                <p>
+                    Hello there! I'm a <span class="highlight">Master's student in Data Science</span> at 
+                    <span class="highlight">Your University</span>, currently working as a research assistant at 
+                    <span class="highlight">Your Lab</span>. My interests span machine learning and deep learning 
+                    in all forms -- from large language models and NLP to computer vision and graphs. 
+                    I'm naturally curious and always looking to better understand how the world works.
+                </p>
+                <div class="social-links">
+                    <a href="mailto:your.email@example.com" class="social-link">
+                        <span>✉️</span> Email
+                    </a>
+                    <a href="https://github.com/yourusername" class="social-link" target="_blank">
+                        <span>💻</span> GitHub
+                    </a>
+                    <a href="https://linkedin.com/in/yourusername" class="social-link" target="_blank">
+                        <span>💼</span> LinkedIn
+                    </a>
+                    <a href="https://scholar.google.com" class="social-link" target="_blank">
+                        <span>🎓</span> Google Scholar
+                    </a>
+                </div>
+                <div class="keywords">
+                    <strong>Keywords:</strong> Natural Language Processing, Machine Learning, Deep Learning, Computer Vision
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="https://via.placeholder.com/280" alt="Your Name">
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="education" style="--delay: 2">
+            <div class="section-header">
+                <div class="section-dot"></div>
+                <h2>Education</h2>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">MSc in Data Science</h3>
+                        <div class="card-subtitle">Your University Name</div>
+                        <div class="card-meta">
+                            <span class="meta-item">📍 City, Country</span>
+                            <span class="meta-item">📊 GPA: X.XX/X.XX - Top XX%</span>
+                            <span class="meta-item">📚 XXX ECTS</span>
+                        </div>
+                    </div>
+                    <div class="card-date">
+                        <span>📅</span>
+                        <span>2023 - 2025</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    Focus on machine learning, deep learning, and data analysis. Relevant coursework includes 
+                    Advanced Machine Learning, Natural Language Processing, Computer Vision, and Statistical Learning.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">BSc in Computer Science</h3>
+                        <div class="card-subtitle">Your Previous University</div>
+                        <div class="card-meta">
+                            <span class="meta-item">📍 City, Country</span>
+                            <span class="meta-item">📊 GPA: X.XX/X.XX</span>
+                        </div>
+                    </div>
+                    <div class="card-date">
+                        <span>📅</span>
+                        <span>2019 - 2023</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" style="--delay: 3">
+            <div class="section-header">
+                <div class="section-dot"></div>
+                <h2>Experience</h2>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Research Assistant</h3>
+                        <div class="card-subtitle">Your Lab / Research Group</div>
+                    </div>
+                    <div class="card-date">
+                        <span>📅</span>
+                        <span>2024 - Present</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    Working on cutting-edge research in natural language processing and machine learning. 
+                    Developing novel approaches to understand how humans learn and interact with each other, 
+                    and how we can model aspects of that behavior computationally.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Machine Learning Intern</h3>
+                        <div class="card-subtitle">Company Name</div>
+                    </div>
+                    <div class="card-date">
+                        <span>📅</span>
+                        <span>Summer 2023</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    Developed machine learning models for production systems. Worked with large-scale datasets 
+                    and deployed models that improved performance by XX%.
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications Section -->
+        <section id="publications" style="--delay: 4">
+            <div class="section-header">
+                <div class="section-dot"></div>
+                <h2>Publications</h2>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Paper Title: A Novel Approach to Problem X</h3>
+                        <div class="card-subtitle">Conference Name 2024</div>
+                    </div>
+                    <div class="card-date">
+                        <span>📄</span>
+                        <span>2024</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <strong>Authors:</strong> Your Name, Co-Author 1, Co-Author 2<br>
+                    Brief description of the paper's contributions and findings. This work introduces a new method 
+                    for solving problem X using technique Y, achieving state-of-the-art results on benchmark Z.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Another Research Paper Title</h3>
+                        <div class="card-subtitle">Journal Name 2023</div>
+                    </div>
+                    <div class="card-date">
+                        <span>📄</span>
+                        <span>2023</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    <strong>Authors:</strong> Your Name, Co-Author 1<br>
+                    Description of this publication and its impact on the field.
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" style="--delay: 5">
+            <div class="section-header">
+                <div class="section-dot"></div>
+                <h2>Projects</h2>
+            </div>
+            
+            <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Project Name 1</h3>
+                    <p class="project-desc">
+                        A machine learning system that does something interesting and useful. 
+                        Built with modern tools and deployed to production.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">NLP</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Project Name 2</h3>
+                    <p class="project-desc">
+                        An innovative approach to solving problem Y using deep learning techniques. 
+                        Achieved impressive results on benchmark datasets.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">PyTorch</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Research</span>
+                    </div>
+                </div>
+
+                <div class="project-card">
+                    <h3 class="project-title">Project Name 3</h3>
+                    <p class="project-desc">
+                        Open-source contribution to a popular machine learning library. 
+                        Added new features and improved performance.
+                    </p>
+                    <div class="project-tags">
+                        <span class="tag">Open Source</span>
+                        <span class="tag">ML</span>
+                        <span class="tag">Python</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Awards Section -->
+        <section id="awards" style="--delay: 6">
+            <div class="section-header">
+                <div class="section-dot"></div>
+                <h2>Awards</h2>
+            </div>
+            
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Excellence Scholarship</h3>
+                        <div class="card-subtitle">Your University</div>
+                    </div>
+                    <div class="card-date">
+                        <span>🏆</span>
+                        <span>2024</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    Awarded to top-performing students in the Data Science program.
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div>
+                        <h3 class="card-title">Best Paper Award</h3>
+                        <div class="card-subtitle">Conference Name 2024</div>
+                    </div>
+                    <div class="card-date">
+                        <span>🏆</span>
+                        <span>2024</span>
+                    </div>
+                </div>
+                <div class="card-content">
+                    Recognition for outstanding research contribution at the conference.
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Your Name. Built with passion for clean design and great code.</p>
+    </footer>
+
+    <script>
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.card, .project-card').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
