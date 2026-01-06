@@ -344,8 +344,9 @@
             color: var(--text-secondary);
             font-size: 0.95rem;
             display: flex;
-            align-items: center;
-            gap: 0.5rem;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.3rem;
         }
 
         .card-content {
@@ -468,6 +469,10 @@
             .social-links {
                 justify-content: center;
             }
+
+            .card-date {
+                align-items: flex-start;
+            }
         }
 
         /* Smooth scrolling */
@@ -542,7 +547,7 @@
     
     <div class="card">
         <div class="card-header">
-            <div>
+            <div style="flex: 1;">
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
                     <img src="images/imperial-college-london-logo.jpg" alt="Imperial College London" style="width: 50px; height: 50px; object-fit: contain; border-radius: 8px;">
                     <div>
@@ -551,40 +556,82 @@
                     </div>
                 </div>
                 <div class="card-meta">
-                    <span class="meta-item">📍 London, United Kingdom</span>
-                    <span class="meta-item">📊 GPA: 81.1/100 - Top 3%</span>
-                    <span class="meta-item">📚 120 ECTS</span>
+                    <span class="meta-item">📊 GPA: 81.1/100 - Top 3% · 120 ECTS</span>
                 </div>
             </div>
             <div class="card-date">
-                <span>📅</span>
-                <span>2024 - 2025</span>
+                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>📅</span>
+                    <span>2024 - 2025</span>
+                </span>
+                <span style="font-size: 0.9rem;">London, United Kingdom</span>
             </div>
         </div>
-        <div class="card-content">
-            Advanced Machine Learning, Natural Language Processing, Computer Vision, and Statistical Learning.
+        <div class="card-content" style="margin-top: 1.5rem;">
+            <p style="margin-bottom: 1.5rem;">
+                Imperial College London is consistently ranked among the world's top universities, placed <strong>#2 globally and #1 in Europe</strong> for Data Science and Artificial Intelligence (QS World University Rankings). The MSc in Data Science and Machine Learning is one of Imperial's most competitive programmes, combining rigorous theoretical foundations with cutting-edge practical applications.
+            </p>
+            
+            <p style="color: var(--text-secondary); font-weight: 600; margin-bottom: 0.8rem; font-size: 0.95rem;">Core modules:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.5rem; margin-left: 1rem;">
+                <div style="color: var(--text-secondary);">• Numerical Programming in Python</div>
+                <div style="color: var(--text-secondary);">• Computational Mathematics</div>
+                <div style="color: var(--text-secondary);">• Data Science and Machine Learning</div>
+                <div style="color: var(--text-secondary);">• Applying Computational/Data Science</div>
+                <div style="color: var(--text-secondary);">• Deep Learning</div>
+                <div style="color: var(--text-secondary);">• Environmental Data</div>
+                <div style="color: var(--text-secondary);">• Inversion and Optimisation</div>
+                <div style="color: var(--text-secondary);">• Advanced Programming</div>
+                <div style="color: var(--text-secondary);">• Big Data Analytics</div>
+            </div>
         </div>
     </div>
 
     <div class="card">
         <div class="card-header">
-            <div>
+            <div style="flex: 1;">
                 <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
                     <img src="images/menu-top-logo.png" alt="University" style="width: 50px; height: 50px; object-fit: contain; border-radius: 8px;">
                     <div>
                         <h3 class="card-title" style="margin-bottom: 0.3rem;">BSc in Computer Science</h3>
-                        <div class="card-subtitle">
-Ss. Cyril and Methodius University</div>
+                        <div class="card-subtitle">Ss. Cyril and Methodius University</div>
                     </div>
                 </div>
                 <div class="card-meta">
-                    <span class="meta-item">📍 Skopje, North Macedonia</span>
-                    <span class="meta-item">📊 GPA: 9.6/10</span>
+                    <span class="meta-item">📊 GPA: 9.56/10.00 - with distinction (2nd in class) · 243 ECTS</span>
                 </div>
             </div>
             <div class="card-date">
-                <span>📅</span>
-                <span>2019 - 2023</span>
+                <span style="display: flex; align-items: center; gap: 0.5rem;">
+                    <span>📅</span>
+                    <span>2019 - 2023</span>
+                </span>
+                <span style="font-size: 0.9rem;">Skopje, North Macedonia</span>
+            </div>
+        </div>
+        <div class="card-content" style="margin-top: 1.5rem;">
+            <p style="margin-bottom: 1.5rem;">
+                Ss. Cyril and Methodius University is the largest and oldest university in North Macedonia, and the Faculty of Computer Science and Engineering is recognized as <strong>the leading institution for computer science education in the country</strong>. Graduated with distinction, ranking <strong>2nd in my cohort</strong> with a GPA of 9.66/10, demonstrating exceptional academic performance across a comprehensive curriculum spanning theoretical foundations, systems programming, and advanced computing topics.
+            </p>
+            
+            <p style="color: var(--text-secondary); font-weight: 600; margin-bottom: 0.8rem; font-size: 0.95rem;">Relevant coursework:</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.5rem; margin-left: 1rem;">
+                <div style="color: var(--text-secondary);">• Mathematics</div>
+                <div style="color: var(--text-secondary);">• Discrete Mathematics</div>
+                <div style="color: var(--text-secondary);">• Numerical Methods</div>
+                <div style="color: var(--text-secondary);">• Statistics</div>
+                <div style="color: var(--text-secondary);">• Physics I/II</div>
+                <div style="color: var(--text-secondary);">• Algorithms and Programming</div>
+                <div style="color: var(--text-secondary);">• Operating Systems</div>
+                <div style="color: var(--text-secondary);">• Distributed Systems</div>
+                <div style="color: var(--text-secondary);">• Computer Networks</div>
+                <div style="color: var(--text-secondary);">• Database Systems</div>
+                <div style="color: var(--text-secondary);">• High Performance Computing</div>
+                <div style="color: var(--text-secondary);">• Intelligent Agents</div>
+                <div style="color: var(--text-secondary);">• Information Systems and Big Data</div>
+                <div style="color: var(--text-secondary);">• Android Development</div>
+                <div style="color: var(--text-secondary);">• iOS Development</div>
+
             </div>
         </div>
     </div>
@@ -604,8 +651,10 @@ Ss. Cyril and Methodius University</div>
                         <div class="card-subtitle">Instill AI</div>
                     </div>
                     <div class="card-date">
-                        <span>📅</span>
-                        <span>2025 - Present</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📅</span>
+                            <span>2025 - Present</span>
+                        </span>
                     </div>
                 </div>
                 <div class="card-content">
@@ -622,8 +671,10 @@ Ss. Cyril and Methodius University</div>
                         <div class="card-subtitle">Company Name</div>
                     </div>
                     <div class="card-date">
-                        <span>📅</span>
-                        <span>Summer 2023</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>📅</span>
+                            <span>Summer 2023</span>
+                        </span>
                     </div>
                 </div>
                 <div class="card-content">
@@ -696,8 +747,10 @@ Ss. Cyril and Methodius University</div>
                         <div class="card-subtitle">Your University</div>
                     </div>
                     <div class="card-date">
-                        <span>🏆</span>
-                        <span>2024</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🏆</span>
+                            <span>2024</span>
+                        </span>
                     </div>
                 </div>
                 <div class="card-content">
@@ -712,8 +765,10 @@ Ss. Cyril and Methodius University</div>
                         <div class="card-subtitle">Conference Name 2024</div>
                     </div>
                     <div class="card-date">
-                        <span>🏆</span>
-                        <span>2024</span>
+                        <span style="display: flex; align-items: center; gap: 0.5rem;">
+                            <span>🏆</span>
+                            <span>2024</span>
+                        </span>
                     </div>
                 </div>
                 <div class="card-content">
@@ -725,7 +780,7 @@ Ss. Cyril and Methodius University</div>
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2025 Your Name. Built with passion for clean design and great code.</p>
+        <p>&copy; 2025 Antonio Nikoloski. Built with passion for clean design and great code.</p>
     </footer>
 
     <script>
