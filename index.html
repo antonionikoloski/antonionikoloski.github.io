@@ -389,6 +389,12 @@
             box-shadow: 0 10px 40px rgba(255, 107, 107, 0.1);
         }
 
+        .project-card a:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
+        }
+
         .project-title {
             font-size: 1.5rem;
             font-weight: 600;
@@ -681,7 +687,7 @@
                 <div class="card-header">
                     <div style="flex: 1;">
                         <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 0.5rem;">
-                            <img src="images/asseco_logo.png" alt="Asseco" style="width: 50px; height: 50px; object-fit: contain; border-radius: 8px;">
+                            <img src="images/asseco.jpg" alt="Asseco" style="width: 50px; height: 50px; object-fit: contain; border-radius: 8px;">
                             <div>
                                 <h3 class="card-title" style="margin-bottom: 0.3rem;">Software Engineer</h3>
                                 <div class="card-subtitle">Asseco</div>
@@ -790,15 +796,31 @@
             
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3 class="project-title">Project Name 1</h3>
+                    <div style="width: 100%; height: 180px; background: var(--border); border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden;">
+                        <img src="images/rag-project-preview.png" alt="RAG Systems Visual Grounding" style="width: 100%; height: 100%; object-fit: cover;">
+                    </div>
+                    <h3 class="project-title">RAG Systems with Visual Grounding</h3>
                     <p class="project-desc">
-                        A machine learning system that does something interesting and useful. 
-                        Built with modern tools and deployed to production.
+                        Advanced multi-stage RAG pipeline for PDF question answering with visual grounding capabilities. 
+                        Implements hybrid retrieval, semantic enrichment via LLMs, and highlights source text on original 
+                        page images with merged bounding boxes. Features two-stage filtering for precise sourcing and 
+                        VLM-based evaluation using Qwen2-VL.
                     </p>
                     <div class="project-tags">
-                        <span class="tag">Python</span>
-                        <span class="tag">TensorFlow</span>
-                        <span class="tag">NLP</span>
+                        <span class="tag">RAG</span>
+                        <span class="tag">LLMs</span>
+                        <span class="tag">Computer Vision</span>
+                        <span class="tag">Milvus</span>
+                        <span class="tag">OpenAI</span>
+                        <span class="tag">Gemini</span>
+                    </div>
+                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
+                        <a href="https://github.com/antonionikoloski" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--accent-dim); color: var(--accent); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.3s ease;">
+                            <span>💻</span> GitHub
+                        </a>
+                        <a href="documents/rag-project-report.pdf" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--accent-dim); color: var(--accent); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.3s ease;">
+                            <span>📄</span> Report
+                        </a>
                     </div>
                 </div>
 
