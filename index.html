@@ -367,36 +367,84 @@
             color: var(--text-secondary);
         }
 
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+        /* Projects Section */
+        .projects-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
         }
 
         .project-card {
             background: var(--card-bg);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 2rem;
+            padding: 2.5rem;
             transition: all 0.4s ease;
-            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 0;
+            background: var(--accent);
+            transition: height 0.4s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 40px rgba(255, 107, 107, 0.1);
+            transform: translateX(8px);
+            border-color: var(--accent-dim);
         }
 
-        .project-card a:hover {
-            background: var(--accent);
-            color: var(--bg-primary);
-            transform: translateY(-2px);
+        .project-card:hover::before {
+            height: 100%;
+        }
+
+        .project-content-wrapper {
+            display: flex;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .project-text-content {
+            flex: 1;
+        }
+
+        .project-image-container {
+            flex-shrink: 0;
+            width: 400px;
+            height: 250px;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .project-image-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .project-card:hover .project-image-container img {
+            transform: scale(1.05);
+        }
+
+        .project-date {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .project-title {
-            font-size: 1.5rem;
+            font-size: 2rem;
             font-weight: 600;
             margin-bottom: 1rem;
             color: var(--text-primary);
@@ -405,13 +453,15 @@
         .project-desc {
             color: var(--text-secondary);
             margin-bottom: 1.5rem;
-            line-height: 1.6;
+            line-height: 1.8;
+            font-size: 1.05rem;
         }
 
         .project-tags {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
+            margin-bottom: 1.5rem;
         }
 
         .tag {
@@ -421,6 +471,30 @@
             border-radius: 6px;
             font-size: 0.85rem;
             font-weight: 500;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: var(--accent-dim);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            background: var(--accent);
+            color: var(--bg-primary);
+            transform: translateY(-2px);
         }
 
         /* Footer */
@@ -468,8 +542,13 @@
                 padding: 1.5rem;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
+            .project-content-wrapper {
+                flex-direction: column-reverse;
+            }
+
+            .project-image-container {
+                width: 100%;
+                height: 200px;
             }
 
             .social-links {
@@ -794,59 +873,109 @@
                 <h2>Projects</h2>
             </div>
             
-            <div class="projects-grid">
+            <p style="color: var(--text-secondary); font-size: 1.05rem; margin-bottom: 3rem; line-height: 1.8;">
+                Some of the selected projects that I think are pretty interesting but in any case I like experimenting a lot so more projects can be found on my <a href="https://github.com/antonionikoloski" target="_blank" style="color: var(--accent); text-decoration: none; transition: opacity 0.3s ease;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">GitHub</a>.
+            </p>
+            
+            <div class="projects-container">
                 <div class="project-card">
-                    <div style="width: 100%; height: 180px; background: var(--border); border-radius: 8px; margin-bottom: 1.5rem; overflow: hidden;">
-                        <img src="images/rag-project-preview.png" alt="RAG Systems Visual Grounding" style="width: 100%; height: 100%; object-fit: cover;">
-                    </div>
-                    <h3 class="project-title">RAG Systems with Visual Grounding</h3>
-                    <p class="project-desc">
-                        Advanced multi-stage RAG pipeline for PDF question answering with visual grounding capabilities. 
-                        Implements hybrid retrieval, semantic enrichment via LLMs, and highlights source text on original 
-                        page images with merged bounding boxes. Features two-stage filtering for precise sourcing and 
-                        VLM-based evaluation using Qwen2-VL.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">RAG</span>
-                        <span class="tag">LLMs</span>
-                        <span class="tag">Computer Vision</span>
-                        <span class="tag">Milvus</span>
-                        <span class="tag">OpenAI</span>
-                        <span class="tag">Gemini</span>
-                    </div>
-                    <div style="display: flex; gap: 1rem; margin-top: 1.5rem;">
-                        <a href="https://github.com/antonionikoloski" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--accent-dim); color: var(--accent); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.3s ease;">
-                            <span>💻</span> GitHub
-                        </a>
-                        <a href="documents/rag-project-report.pdf" target="_blank" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 1rem; background: var(--accent-dim); color: var(--accent); text-decoration: none; border-radius: 6px; font-size: 0.9rem; transition: all 0.3s ease;">
-                            <span>📄</span> Report
-                        </a>
+                    <div class="project-content-wrapper">
+                        <div class="project-text-content">
+                            <div class="project-date">
+                                <span>📅</span>
+                                <span>Jan 2025</span>
+                            </div>
+                            <h3 class="project-title">RAG Systems with Visual Grounding</h3>
+                            <p class="project-desc">
+                                Advanced multi-stage RAG pipeline for PDF question answering with visual grounding capabilities. 
+                                Implements hybrid retrieval, semantic enrichment via LLMs, and highlights source text on original 
+                                page images with merged bounding boxes. Features two-stage filtering for precise sourcing and 
+                                VLM-based evaluation using Qwen2-VL.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">RAG</span>
+                                <span class="tag">LLMs</span>
+                                <span class="tag">Computer Vision</span>
+                                <span class="tag">Milvus</span>
+                                <span class="tag">OpenAI</span>
+                                <span class="tag">Gemini</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://github.com/antonionikoloski" target="_blank" class="project-link">
+                                    <span>📄</span> PDF
+                                </a>
+                                <a href="https://github.com/antonionikoloski" target="_blank" class="project-link">
+                                    <span>💻</span> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image-container">
+                            <img src="images/rag-project-preview.png" alt="RAG Systems Visual Grounding">
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3 class="project-title">Project Name 2</h3>
-                    <p class="project-desc">
-                        An innovative approach to solving problem Y using deep learning techniques. 
-                        Achieved impressive results on benchmark datasets.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">PyTorch</span>
-                        <span class="tag">Computer Vision</span>
-                        <span class="tag">Research</span>
+                    <div class="project-content-wrapper">
+                        <div class="project-text-content">
+                            <div class="project-date">
+                                <span>📅</span>
+                                <span>Dec 2024</span>
+                            </div>
+                            <h3 class="project-title">Project Name 2</h3>
+                            <p class="project-desc">
+                                An innovative approach to solving problem Y using deep learning techniques. 
+                                Achieved impressive results on benchmark datasets with state-of-the-art performance.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">PyTorch</span>
+                                <span class="tag">Computer Vision</span>
+                                <span class="tag">Research</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="project-link">
+                                    <span>📄</span> PDF
+                                </a>
+                                <a href="#" target="_blank" class="project-link">
+                                    <span>💻</span> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image-container">
+                            <img src="images/project2-preview.png" alt="Project 2">
+                        </div>
                     </div>
                 </div>
 
                 <div class="project-card">
-                    <h3 class="project-title">Project Name 3</h3>
-                    <p class="project-desc">
-                        Open-source contribution to a popular machine learning library. 
-                        Added new features and improved performance.
-                    </p>
-                    <div class="project-tags">
-                        <span class="tag">Open Source</span>
-                        <span class="tag">ML</span>
-                        <span class="tag">Python</span>
+                    <div class="project-content-wrapper">
+                        <div class="project-text-content">
+                            <div class="project-date">
+                                <span>📅</span>
+                                <span>Nov 2024</span>
+                            </div>
+                            <h3 class="project-title">Project Name 3</h3>
+                            <p class="project-desc">
+                                Open-source contribution to a popular machine learning library. 
+                                Added new features and improved performance across multiple benchmarks.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Open Source</span>
+                                <span class="tag">ML</span>
+                                <span class="tag">Python</span>
+                            </div>
+                            <div class="project-links">
+                                <a href="#" target="_blank" class="project-link">
+                                    <span>📄</span> PDF
+                                </a>
+                                <a href="#" target="_blank" class="project-link">
+                                    <span>💻</span> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="project-image-container">
+                            <img src="images/project3-preview.png" alt="Project 3">
+                        </div>
                     </div>
                 </div>
             </div>
